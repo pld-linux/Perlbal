@@ -17,6 +17,7 @@ Source0:	http://www.cpan.org/modules/by-authors/id/B/BR/BRADFITZ/Perlbal-%{versi
 Source1:	perlbal.init
 Source2:	perlbal.sysconfig
 Patch0:		%{name}-no_use_lib.patch
+Patch1:		%{name}-test_15_webserver.patch
 URL:		http://www.danga.com/perlbal/
 Requires(post,preun):	/sbin/chkconfig
 BuildRequires:	rpmbuild(macros) >= 1.228
@@ -49,6 +50,7 @@ of Perlbal.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__perl} Makefile.PL \
