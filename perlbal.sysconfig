@@ -1,0 +1,7 @@
+# $Id$
+
+#PERLBAL_OPTS="--daemon --config=/etc/perlbal/perlbal.conf"
+PERLBAL_OPTS="--daemon --config=/etc/perlbal/echoservice.conf"
+
+# SERVICE_NICE_RUN_LEVEL=5
+
