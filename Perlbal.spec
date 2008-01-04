@@ -5,7 +5,7 @@
 #
 %include	/usr/lib/rpm/macros.perl
 Summary:	Perlbal - Reverse-proxy load balancer and webserver
-#Summary(pl.UTF-8):	
+Summary(pl.UTF-8):	Perlbal - odwrotne proxy z równoważeniem obciążenia oraz serwer WWW
 Name:		Perlbal
 Version:	1.59
 Release:	2
@@ -19,16 +19,17 @@ Source2:	perlbal.sysconfig
 Patch0:		%{name}-no_use_lib.patch
 Patch1:		%{name}-test_15_webserver.patch
 URL:		http://www.danga.com/perlbal/
-Requires(post,preun):	/sbin/chkconfig
-BuildRequires:	rpmbuild(macros) >= 1.228
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
+BuildRequires:	rpmbuild(macros) >= 1.228
 %if %{with autodeps} || %{with tests}
 BuildRequires:	perl-BSD-Resource
 BuildRequires:	perl-Danga-Socket >= 1.44
 BuildRequires:	perl-Sys-Syscall
 BuildRequires:	perl-libwww
 %endif
+Requires(post,preun):	/sbin/chkconfig
+Requires:	rc-scripts
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -44,8 +45,16 @@ the software. A basic configuration file containing a management
 port enables you to easily perform operations on a running instance
 of Perlbal.
 
-# %description -l pl.UTF-8
-# TODO
+%description -l pl.UTF-8
+Perlbal to jednowątkowy, oparty na zdarzeniach serwer obsługujący
+równoważenie obciążenia HTTP, świadczenie usług WWW oraz połączenie
+obu.
+
+Jedną z cech charakterystycznych dla Perlbala jest to, że prawie
+wszystko można skonfigurować lub przekonfigurować w locie, bez
+potrzeby restartu programu. Podstawowy plik konfiguracyjny zawierający
+port zarządzający pozwala na łatwe wykonywanie operacji na działającej
+instancji Perlbala.
 
 %prep
 %setup -q
@@ -85,9 +94,9 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc CHANGES doc conf
-%{perl_vendorlib}/*.pm
-%{perl_vendorlib}/Perlbal/
 %attr(755,root,root) %{_bindir}/*
+%{perl_vendorlib}/*.pm
+%{perl_vendorlib}/Perlbal
 %{_mandir}/man?/*
 %attr(754,root,root) /etc/rc.d/init.d/perlbal
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/perlbal
