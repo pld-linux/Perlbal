@@ -51,6 +51,16 @@ stop() {
 	fi
 }
 
+condrestart() {
+	if [ -f /var/lock/subsys/perlbal ]; then
+		stop
+		start
+	else
+		msg_not_running perlbal
+		RETVAL=$1
+	fi
+}
+
 reload() {
 	if [ -f /var/lock/subsys/perlbal ]; then
 		msg_reloading perlbal
@@ -75,20 +85,18 @@ case "$1" in
 	stop
 	start
 	;;
-  reload)
-  	reload
+  try-restart)
+	condrestart 0
 	;;
-# ONLY if program allows reloading without stopping
-# otherwise include force-reload with 'reload'
-  force-reload)
-	reload
+  reload|force-reload)
+  	reload
 	;;
   status)
 	status perlbal
 	RETVAL=$?
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
+	msg_usage "$0 {start|stop|restart|try-restart|reload|force-reload|status}"
 	exit 3
 esac
 
