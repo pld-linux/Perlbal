@@ -8,7 +8,7 @@ Summary:	Perlbal - Reverse-proxy load balancer and webserver
 Summary(pl.UTF-8):	Perlbal - odwrotne proxy z równoważeniem obciążenia oraz serwer WWW
 Name:		Perlbal
 Version:	1.59
-Release:	2
+Release:	3
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
