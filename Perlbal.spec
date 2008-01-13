@@ -12,7 +12,7 @@ Release:	3
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
-Source0:	http://www.cpan.org/modules/by-authors/id/B/BR/BRADFITZ/Perlbal-%{version}.tar.gz
+Source0:	http://www.cpan.org/modules/by-authors/id/B/BR/BRADFITZ/%{name}-%{version}.tar.gz
 # Source0-md5:	7d098abd4434b70f13638cdff3e2383a
 Source1:	perlbal.init
 Source2:	perlbal.sysconfig
@@ -33,7 +33,7 @@ Requires:	rc-scripts
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define	_noautoreq	'perl(Perlbal.*)'
+%define		_noautoreq	'perl(Perlbal.*)'
 
 %description
 Perlbal is a single-threaded event-based server supporting HTTP load
@@ -41,9 +41,9 @@ balancing, web serving, and a mix of the two.
 
 One of the defining things about Perlbal is that almost everything can
 be configured or reconfigured on the fly without needing to restart
-the software. A basic configuration file containing a management
-port enables you to easily perform operations on a running instance
-of Perlbal.
+the software. A basic configuration file containing a management port
+enables you to easily perform operations on a running instance of
+Perlbal.
 
 %description -l pl.UTF-8
 Perlbal to jednowątkowy, oparty na zdarzeniach serwer obsługujący
@@ -61,6 +61,10 @@ instancji Perlbala.
 %patch0 -p1
 %patch1 -p1
 
+# not good on ac builders as they use same hardware
+# just don't send athlon, ix86 requests at once
+#mv t/31-realworld.{t,disabled}
+
 %build
 %{__perl} Makefile.PL \
 	INSTALLDIRS=vendor
@@ -77,6 +81,7 @@ rm -rf $RPM_BUILD_ROOT
 install -D %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/perlbal
 install -D %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/perlbal
 cp -r conf $RPM_BUILD_ROOT%{_sysconfdir}/perlbal
+rm $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Perlbal/.packlist
 
 %clean
 rm -rf $RPM_BUILD_ROOT
