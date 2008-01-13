@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %bcond_without	autodeps	# don't BR packages needed only for resolving deps
-%bcond_without	tests		# do not perform "make test"
+%bcond_with	tests		# do not perform "make test"
 #
 %include	/usr/lib/rpm/macros.perl
 Summary:	Perlbal - Reverse-proxy load balancer and webserver
@@ -62,10 +62,6 @@ instancji Perlbala.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-
-# not good on ac builders as they use same hardware
-# just don't send athlon, ix86 requests at once
-#mv t/31-realworld.{t,disabled}
 
 %build
 %{__perl} Makefile.PL \
