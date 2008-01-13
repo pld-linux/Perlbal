@@ -18,6 +18,7 @@ Source1:	perlbal.init
 Source2:	perlbal.sysconfig
 Patch0:		%{name}-no_use_lib.patch
 Patch1:		%{name}-test_15_webserver.patch
+Patch2:		perlbal-freeport.patch
 URL:		http://www.danga.com/perlbal/
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
@@ -60,6 +61,7 @@ instancji Perlbala.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 # not good on ac builders as they use same hardware
 # just don't send athlon, ix86 requests at once
@@ -70,7 +72,11 @@ instancji Perlbala.
 	INSTALLDIRS=vendor
 %{__make}
 
-%{?with_tests:%{__make} test}
+%if %{with tests}
+# randomize the first base port a little
+export TEST_TCP_FREE_PORT=$((4096 + $(id -u)))
+%{__make} test
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
