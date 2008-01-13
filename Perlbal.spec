@@ -74,7 +74,7 @@ instancji Perlbala.
 
 %if %{with tests}
 # randomize the first base port a little
-export TEST_TCP_FREE_PORT=$((4096 + $(id -u)))
+export TEST_TCP_FREE_PORT=$(perl -e 'print (4096 + $$) % 65536')
 %{__make} test
 %endif
 
