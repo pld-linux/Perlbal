@@ -1,0 +1,11 @@
+--- Perlbal-1.59/lib/Perlbal/Test.pm~	2007-04-16 23:15:54.000000000 +0300
++++ Perlbal-1.59/lib/Perlbal/Test.pm	2008-01-14 01:12:43.846450751 +0200
+@@ -15,7 +15,7 @@
+ our $to_kill = 0;
+ our $mgmt_port;
+ 
+-our $free_port = 60000;
++our $free_port = $ENV{TEST_TCP_FREE_PORT} || 60000;
+ 
+ sub mgmt_port { return $mgmt_port; }
+ 
