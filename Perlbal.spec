@@ -1,3 +1,5 @@
+# TODO
+# - split perl-devel for Devel::Peek?
 #
 # Conditional build:
 %bcond_without	autodeps	# don't BR packages needed only for resolving deps
