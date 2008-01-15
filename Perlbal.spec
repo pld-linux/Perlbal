@@ -103,11 +103,12 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc CHANGES doc conf
-%attr(755,root,root) %{_bindir}/*
+%dir %{_sysconfdir}/perlbal
+%attr(640,root,root) %{_sysconfdir}/perlbal/*.conf
+%attr(640,root,root) %{_sysconfdir}/perlbal/*.dat
+%attr(754,root,root) /etc/rc.d/init.d/perlbal
+%config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/perlbal
+%attr(755,root,root) %{_bindir}/perlbal
 %{perl_vendorlib}/*.pm
 %{perl_vendorlib}/Perlbal
 %{_mandir}/man?/*
-%attr(754,root,root) /etc/rc.d/init.d/perlbal
-%config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/perlbal
-%dir %{_sysconfdir}/perlbal
-%attr(740,root,root) %{_sysconfdir}/perlbal/*
