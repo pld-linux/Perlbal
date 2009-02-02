@@ -3,23 +3,22 @@
 #
 # Conditional build:
 %bcond_without	autodeps	# don't BR packages needed only for resolving deps
-%bcond_with	tests		# do not perform "make test"
+%bcond_without	tests		# perform "make test"
 #
 %include	/usr/lib/rpm/macros.perl
 Summary:	Perlbal - Reverse-proxy load balancer and webserver
 Summary(pl.UTF-8):	Perlbal - odwrotne proxy z równoważeniem obciążenia oraz serwer WWW
 Name:		Perlbal
-Version:	1.59
-Release:	3
+Version:	1.72
+Release:	1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
-Source0:	http://www.cpan.org/modules/by-authors/id/B/BR/BRADFITZ/%{name}-%{version}.tar.gz
-# Source0-md5:	7d098abd4434b70f13638cdff3e2383a
+Source0:	http://www.cpan.org/modules/by-authors/id/D/DO/DORMANDO/%{name}-%{version}.tar.gz
+# Source0-md5:	041253900d7dfa98beee3d0aab9939b7
 Source1:	perlbal.init
 Source2:	perlbal.sysconfig
 Patch0:		%{name}-no_use_lib.patch
-Patch1:		%{name}-test_15_webserver.patch
 Patch2:		perlbal-freeport.patch
 URL:		http://www.danga.com/perlbal/
 BuildRequires:	perl-devel >= 1:5.8.0
@@ -62,7 +61,6 @@ instancji Perlbala.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 %patch2 -p1
 
 %build
