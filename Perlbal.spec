@@ -5,7 +5,6 @@
 %bcond_without	autodeps	# don't BR packages needed only for resolving deps
 %bcond_without	tests		# perform "make test"
 #
-%include	/usr/lib/rpm/macros.perl
 Summary:	Perlbal - Reverse-proxy load balancer and webserver
 Summary(pl.UTF-8):	Perlbal - odwrotne proxy z równoważeniem obciążenia oraz serwer WWW
 Name:		Perlbal
